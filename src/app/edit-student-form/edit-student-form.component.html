@@ -1,0 +1,37 @@
+<div class="fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full relative">
+        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" (click)="closeForm()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        <h2 class="text-2xl font-bold mb-6 text-center">Edit Student</h2>
+        <form class="space-y-4" (submit)="onUpdateStudent()">
+          <div>
+            <label for="name" class="block text-gray-700 font-semibold mb-2">Name</label>
+            <input type="text" id="name" name="name" [(ngModel)]="selectedStudent.name" required
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter student's name">
+          </div>
+          <div>
+            <label for="age" class="block text-gray-700 font-semibold mb-2">Age</label>
+            <input type="number" id="age" name="age" [(ngModel)]="selectedStudent.age" required
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Enter student's age">
+          </div>
+          <button type="submit" [disabled]="!selectedStudent.name || !selectedStudent.age"
+            class="w-full py-2 px-4 rounded-lg bg-blue-500 text-white font-semibold hover:bg-blue-600 transition duration-300">
+            <ng-container *ngIf="!loading; else loadingIndicator">Edit Student</ng-container>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ng-template #loadingIndicator>
+    <button class="w-full py-2 px-4 rounded-lg bg-blue-500 text-white font-semibold cursor-not-allowed opacity-50" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+  </ng-template>
+  
